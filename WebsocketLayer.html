@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>arraylayer.js - Documentation</title>
+    <title>WebsocketLayer - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,102 +29,368 @@
 
 <div id="main">
     
-    <h1 class="page-title">arraylayer.js</h1>
+    <h1 class="page-title">WebsocketLayer</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import React from 'react'; // eslint-disable-line no-unused-vars
-import Layer from './layer';
+        <h2>
+        WebsocketLayer
+        </h2>
+        
+            <div class="class-description"><p>Wrapper around sigplot.Plot.overlay_websocket</p>
+<p>Typical use of this layer looks like
+<SigPlot>
+&lt;WebsocketLayer wsurl={'ws://localhost:8080'}/&gt;
+</SigPlot></p></div>
+        
+    
+</header>
 
-/**
- * ArrayLayer wrapper for sigplot.layer1d and sigplot.layer2d
- *
- * This layer is meant for static 1D and 2D (or 1D with `framesize`)
- * JS arrays/ArrayBuffers. A typical use case looks like
- *
- * For a 1-D spectral or time-series plot:
- *
- *   &lt;SigPlot>
- *     &lt;ArrayLayer data={[1, 2, 3]}/>
- *   &lt;/SigPlot>
- *
- * For a 2-D raster/heatmap:
- *
- *   &lt;SigPlot>
- *     &lt;ArrayLayer data={[[1, 2, 3], [2, 3, 4]]}/>
- *   &lt;/SigPlot>
- */
-class ArrayLayer extends Layer {
-  /**
-   * Handles ArrayLayer being mounted onto the DOM
-   *
-   * All we need to do when the component 'mounts',
-   * is call `plot.overlay_array` with the relevant
-   * data and options. This will return our layer object.
-   *
-   * A large portion of the time, especially for dynamic
-   * systems, this will look like
-   * `this.plot.overlay_array([], undefined)` upon mount.
-   */
-  componentDidMount() {
-    const { data, options, layerOptions } = this.props;
-    this.layer = this.plot.overlay_array(data, options, layerOptions);
-  }
+<article>
+    <div class="container-overview">
+    
+        
+<div class="section-method">
 
-  /**
-   * Handles new properties being passed into &lt;ArrayLayer/>
-   *
-   * This will be replaced by
-   *
-   *     static getDerivedStateFromProps(nextProps, prevState)
-   *
-   * in React 17.
-   *
-   * This sits in the lifecycle right before `shouldComponentUpdate`,
-   * `componentWillUpdate`, and most importantly `render`, so this is
-   * where we will call the plot's `reload` and `headermod` methods.
-   *
-   * @param nextProps    the newly received properties
-   */
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const {
-      data: currentData,
-      options: currentOptions,
-      layerOptions: currentLayerOptions,
-    } = this.props;
+    
+    <h2>Constructor</h2>
+    
 
-    const {
-      data: nextData,
-      options: nextOptions,
-      layerOptions: nextLayerOptions,
-    } = nextProps;
+    <h4 class="name" id="WebsocketLayer"><span class="type-signature"></span>new WebsocketLayer<span class="signature">()</span><span class="type-signature"></span></h4>
 
-    // if the data changes, we'll go ahead
-    // and do a full `reload`;
-    // otherwise, we only need to headermod
-    // with the new options
-    if (nextData !== currentData) {
-      this.plot.reload(this.layer, nextData, nextOptions);
-    } else if (nextOptions !== currentOptions) {
-      this.plot.headermod(this.layer, nextOptions);
-    } else if (nextLayerOptions !== currentLayerOptions) {
-      this.plot.get_layer(this.layer).change_settings(nextLayerOptions);
-    }
+    
 
-    return false;
-  }
-}
 
-export default ArrayLayer;
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="websocketlayer.js.html">websocketlayer.js</a>, <a href="websocketlayer.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="componentDidMount"><span class="type-signature"></span>componentDidMount<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>On mount, all we need to do is call overlay_websocket</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="websocketlayer.js.html">websocketlayer.js</a>, <a href="websocketlayer.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="UNSAFE_componentWillReceiveProps"><span class="type-signature"></span>UNSAFE_componentWillReceiveProps<span class="signature">(nextProps)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Handles new properties being passed into <HrefLayer/></p>
+<p>This will be replaced by</p>
+<pre><code>static getDerivedStateFromProps(nextProps, prevState)
 </code></pre>
-        </article>
-    </section>
+<p>in React 17.</p>
+<p>This sits in the lifecycle right before <code>shouldComponentUpdate</code>,
+<code>componentWillUpdate</code>, and most importantly <code>render</code>, so this is
+where we will call the plot's <code>reload</code> and <code>headermod</code> methods.</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="websocketlayer.js.html">websocketlayer.js</a>, <a href="websocketlayer.js.html#line64">line 64</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Investigate whether deoverlay is necessary here</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>nextProps</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <p>the newly received properties</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
